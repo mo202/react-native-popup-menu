@@ -12,6 +12,12 @@ export default class MenuTrigger extends Component {
     this.context.menuActions.openMenu(this.props.menuName);
   }
 
+  _onLongPress() {
+    debug('trigger onLongPress');
+    this.props.onPress && this.props.onLongPress();
+    this.context.menuActions.openMenu(this.props.menuName);
+  }
+
   render() {
     const { disabled, onRef, text, children, style, customStyles, menuName, ...other } = this.props;
     const onPress = () => !disabled && this._onPress();
@@ -19,7 +25,8 @@ export default class MenuTrigger extends Component {
     return (
       <View ref={onRef} collapsable={false} style={customStyles.triggerOuterWrapper}>
         <Touchable
-          onPress={onPress}
+          //onPress={onPress}
+          onLongPress={onLongPress}
           {...defaultTouchableProps}
           {...customStyles.triggerTouchable}
         >
